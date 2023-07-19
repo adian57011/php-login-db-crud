@@ -63,6 +63,8 @@ function connection()
 
 }
 
+
+//it is a utility function that takes the db name and db table and checks if the table already exists or not
 function tableChecker($dbName,$dbTable)
 {
     $con = connection();
@@ -76,7 +78,7 @@ function tableChecker($dbName,$dbTable)
     if(mysqli_num_rows($res)>0)
     {
         echo "found";
-        return false;
+        return false;   //if found then returns false
     }
     else
     {
@@ -90,14 +92,14 @@ function createAdminTable()
     $db_name = "login_crud";
     $db_table = "admin";
     $con = connection();
-    $tableSchema = " 
-        CREATE TABLE IF NOT EXISTS admin(
-         admin_id INT(10) UNSIGNED AUTO_INCREAMENT,
-         name VARCHAR(20) NOT NULL,
-         username VARCHAR(20) NOT NULL,
-         email VARCHAR(20) NOT NULL,
-         password VARCHAR(20) NOT NULL
-         PRIMARY KEY (admin_id)";
+    $tableSchema = "CREATE TABLE IF NOT EXISTS admin(
+        admin_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(20) NOT NULL,
+        username VARCHAR(20) NOT NULL,
+        email VARCHAR(20) NOT NULL,
+        password VARCHAR(20) NOT NULL
+    )";
+
     
     if(!tableChecker($db_name,$db_table))
     {
@@ -118,70 +120,38 @@ function createAdminTable()
     }           
 }
 
-    // else
-    // {
-    //     echo "Connection found  .. Connected to database <br>";
-        
-    //     $sql = "CREATE DATABASE $db_name";
+function staffTableCreate()
+{
+    $con = connection();
+    $db_name = "login_crud";
+    $db_table = "staff";
+    $tableSchema = "CREATE TABLE IF NOT EXISTS staffs(
+        staff_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(20) NOT NULL,
+        username VARCHAR(20) NOT NULL,
+        email VARCHAR(20) NOT NULL,
+        password VARCHAR(20) NOT NULL,
+        admin_id INT(6) 
+    ) ";
 
-    //     $db_res = mysqli_query($con,$sql);
-        
-    //     if(!$db_res)
-    //     {
-    //         echo "Connection Error .. Couldnot create the" . $db_name."<br>";
-    //     }
+    if(!tableChecker($db_name,$db_table))
+    {
+        echo "Table already exists";
+    }
+    else
+    {
+        $staffTable = mysqli_query($con,$tableSchema);
+        if(!$staffTable)
+        {
+            echo "Staff Table can not be created!";
+        }
+        else
+        {
+            echo "Staff Table Created!";
+        }
+    }
+}
 
-    //     else
-    //     {
-    //         //this connects to the database and table
-    //         $con1 = mysqli_connect($db_host,$db_user,$db_pass,$db_name); 
-
-           //defince table name and schema.
-    //         $adminTable = mysqli_query($con1,$tableSchema1);
-
-    //         if(!$adminTable)
-    //         {
-    //             echo "Technical error.No admin table was created<br>";
-    //         }
-
-    //         else
-    //         {
-    //             echo "Admin table initiated";
-    //             $tableSchema2 = "
-    //             CREATE TABLE staff(
-    //                 staffid INT(10) AUTO_INCREAMENT PRIMARY_KEY,
-    //                 name VARCHAR(20) NOT NULL,
-    //                 username VARCHAR(20) NOT NULL,
-    //                 email VARCHAR(20) NOT NULL,
-    //                 password VARCHAR NOT NULL,
-    //                 CONSTRAINT fk_admin
-    //                 FOREIGN KEY (adminid) REFERENCES admin(adminid)
-    //                 ON DELETE CASCADE
-    //                 ON UPDATE CASCADE
-    //             )";
-
-    //             $staffTable = mysqli_query($con1,$tableSchema2);
-
-    //             if(!$staffTable)
-    //             {
-    //                 echo "Technical error. No staff table could be created<br>";
-    //             }
-
-    //             else
-    //             {
-    //                 echo "Staff Table Initiated!<br>";
-    //             }
-    //         }
-
-            
-
-
-    //     }
-    // }
-
-
-
-
-createAdminTable();
+staffTableCreate();
 
 ?>
