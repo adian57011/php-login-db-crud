@@ -151,7 +151,4 @@ function staffTableCreate()
         }
     }
 }
-
-staffTableCreate();
-
 ?>
