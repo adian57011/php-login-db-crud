@@ -3,13 +3,13 @@ require_once("db_con.php");
 
 
 //this login function returns true if user found.False if user is not found!
-function login($username,$password)
+function admin_login($email,$password)
 {
     $con = connection();
 
     $sql = "SELECT * 
     FROM admin
-    WHERE username = '$username' AND password = '$password'";
+    WHERE email = '$email' AND password = '$password'";
 
     $query = mysqli_query($con,$sql);
 
@@ -18,7 +18,6 @@ function login($username,$password)
        
         return true;
     }
-    
     
     return false;
 }
