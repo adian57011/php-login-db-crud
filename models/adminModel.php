@@ -2,7 +2,7 @@
 require_once("db_con.php");
 
 
-//this login function returns true if user found.False if user is not found!
+//this login function returns user if user found.False if user is not found!
 function admin_login($email,$password)
 {
     $con = connection();
@@ -15,8 +15,8 @@ function admin_login($email,$password)
 
     if(mysqli_num_rows($query) > 0)
     {
-       
-        return true;
+        $row = mysqli_fetch_assoc($query);     
+        return $row;
     }
     
     return false;

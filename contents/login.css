@@ -1,0 +1,56 @@
+body{
+    background-color: ivory;
+}
+
+.container {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0,auto;
+    position: relative;
+    top: 150px;
+    left: 500px;
+  }
+.container legend{
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    
+}
+
+.container label{
+    margin-bottom: 10px;
+    font-size: large;
+}
+
+.container form{
+
+    width: 100%;    
+}
+
+.container input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+.container input[type = submit],input[type = reset] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
